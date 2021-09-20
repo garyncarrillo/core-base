@@ -8,4 +8,6 @@
 
 user = User.find_or_create_by(email: 'adminl@sena.co') do |user|
   user.password = 'Pass1111$'
+  user.first_name = 'Admin'
+  user.last_name = 'Admin'
 end
