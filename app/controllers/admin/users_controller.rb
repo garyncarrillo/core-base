@@ -9,6 +9,7 @@ module Admin
       user = User.user.new(user_params)
 
       if user.save
+        user.invite!
         render json: { user: UserSerializer.new(user) }, status: 200
       else
         render json: { errors: user.errors.messages }, status: 406

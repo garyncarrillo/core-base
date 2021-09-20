@@ -8,6 +8,7 @@ gem 'rails', '~> 6.1.4', '>= 6.1.4.1'
 # Use postgresql as the database for Active Record
 gem 'devise', '4.8.0'
 gem 'devise-jwt', '0.8.1'
+gem 'devise_invitable', '2.0.5'
 gem 'fast_jsonapi', '1.5'
 
 gem 'dotenv-rails', '2.7.6'
