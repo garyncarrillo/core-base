@@ -8,6 +8,8 @@ class User < ApplicationRecord
   enum role: [:admin, :user, :mananger]
   enum sex: [:woman, :man, :other]
 
+  belongs_to :wish, required: false
+
   validates :email, uniqueness: true
   validates :first_name, presence: true
   validates :last_name, presence: true
