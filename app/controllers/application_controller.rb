@@ -15,4 +15,5 @@ class ApplicationController < ActionController::API
     exception.to_s.match(/Couldn't find ([\w]+) with 'id'=([\d]+)/)
     render json: {status: 404, errors: {$1 => ["#{$1} with id #{$2} was not found"]}}, status: 404
   end
+
 end

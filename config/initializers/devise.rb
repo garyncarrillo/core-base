@@ -369,6 +369,7 @@ Devise.setup do |config|
     jwt.secret = ENV['DEVISE_JWT_SECRET_KEY']
     jwt.dispatch_requests = [
       ['POST', %r{^/sign_in$}],
+      ['POST', %r{^/sign_up$}],
     ]
     jwt.expiration_time = 7.day.to_i
   end
