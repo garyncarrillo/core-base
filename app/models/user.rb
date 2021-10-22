@@ -8,9 +8,17 @@ class User < ApplicationRecord
   enum role: [:admin, :user, :mananger]
   enum sex: [:woman, :man, :other]
 
+  after_create :assign_assessments
+
+  has_many :assessments_users
+  has_many :assessments, through: :assessments_users
+
   belongs_to :wish, required: false
 
   validates :email, uniqueness: true
   validates :first_name, presence: true
   validates :last_name, presence: true
+
+  def assign_assessments
+  end
 end

@@ -10,10 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_21_131721) do
+ActiveRecord::Schema.define(version: 2021_10_22_121219) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "assessment_types", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "description", null: false
+    t.boolean "is_active", default: true
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "assessments", force: :cascade do |t|
+    t.string "description", null: false
+    t.boolean "is_active", default: true
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "assessment_type_id"
+    t.index ["assessment_type_id"], name: "index_assessments_on_assessment_type_id"
+  end
+
+  create_table "assessments_users", force: :cascade do |t|
+    t.bigint "assessment_id", null: false
+    t.bigint "user_id", null: false
+    t.boolean "answer"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["assessment_id"], name: "index_assessments_users_on_assessment_id"
+    t.index ["user_id"], name: "index_assessments_users_on_user_id"
+  end
 
   create_table "jwt_denylist", force: :cascade do |t|
     t.string "jti", null: false
@@ -70,4 +97,6 @@ ActiveRecord::Schema.define(version: 2021_10_21_131721) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "assessments_users", "assessments"
+  add_foreign_key "assessments_users", "users"
 end
