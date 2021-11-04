@@ -36,4 +36,6 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  resources :records, only: %i(index)
 end
