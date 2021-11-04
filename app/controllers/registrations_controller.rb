@@ -15,7 +15,11 @@ class RegistrationsController < Devise::RegistrationsController
     if user.save
        UserMailer.welcome_email(user, 'http://example.com/login').deliver_now
        sign_in(user)
-       render json: UserSerializer.new(user), status: 200
+       render json: UserSerializer.new(user,
+         {
+          include: [:assessments]
+        }
+       ), status: 200
     else
       render json: { errors: user.errors.messages }, status: 406
     end

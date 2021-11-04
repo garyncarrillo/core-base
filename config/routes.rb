@@ -29,9 +29,11 @@ Rails.application.routes.draw do
     end
   end
 
-  namespace :mananger do
-  end
-
-  namespace :user do
+  resources :'me', controller: 'me', only: %i(update) do
+    member do
+      resources :assessments, only: %i(index) do
+        post :answer
+      end
+    end
   end
 end

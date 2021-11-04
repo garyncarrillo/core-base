@@ -20,5 +20,8 @@ class User < ApplicationRecord
   validates :last_name, presence: true
 
   def assign_assessments
+    Assessment.all.each do |assessment|
+      AssessmentsUser.create(user_id: self.id, assessment_id: assessment.id, answer: false)
+    end
   end
 end
