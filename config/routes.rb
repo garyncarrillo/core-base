@@ -35,6 +35,10 @@ Rails.application.routes.draw do
         post :answer
       end
     end
+    collection do
+      post :subscribe_newsletter
+      delete :remove_newsletter
+    end
   end
 
   resources :records, only: %i(index)
