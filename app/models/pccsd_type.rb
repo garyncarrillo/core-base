@@ -1,0 +1,2 @@
+class PccsdType < ApplicationRecord
+end

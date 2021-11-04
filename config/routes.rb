@@ -43,4 +43,5 @@ Rails.application.routes.draw do
 
   resources :records, only: %i(index)
   resources :specialists, only: %i(index show create update)
+  resources :solicitations, except: %i(new)
 end

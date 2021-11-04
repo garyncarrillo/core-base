@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_04_214027) do
+ActiveRecord::Schema.define(version: 2021_11_04_215330) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,13 @@ ActiveRecord::Schema.define(version: 2021_11_04_214027) do
     t.index ["jti"], name: "index_jwt_denylist_on_jti"
   end
 
+  create_table "pccsd_types", force: :cascade do |t|
+    t.string "name"
+    t.boolean "is_active", default: true
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "name", null: false
     t.boolean "is_active", default: true
@@ -62,6 +69,14 @@ ActiveRecord::Schema.define(version: 2021_11_04_214027) do
     t.string "url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "solicitations", force: :cascade do |t|
+    t.text "description"
+    t.bigint "pccsd_type_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["pccsd_type_id"], name: "index_solicitations_on_pccsd_type_id"
   end
 
   create_table "specialists", force: :cascade do |t|
@@ -118,4 +133,5 @@ ActiveRecord::Schema.define(version: 2021_11_04_214027) do
 
   add_foreign_key "assessments_users", "assessments"
   add_foreign_key "assessments_users", "users"
+  add_foreign_key "solicitations", "pccsd_types"
 end
