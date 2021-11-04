@@ -38,4 +38,5 @@ Rails.application.routes.draw do
   end
 
   resources :records, only: %i(index)
+  resources :specialists, only: %i(index show create update)
 end
