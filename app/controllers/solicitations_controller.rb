@@ -17,7 +17,11 @@ class SolicitationsController < ApplicationController
     solicitation = Solicitation.find(params[:id])
 
     if solicitation.update(solicitation_params)
-      render json: { solicitation: SolicitationSerializer.new(solicitation) }, status: 201
+      render json: { solicitation: SolicitationSerializer.new(solicitation,
+        {
+          include: [:pccsd_type]
+        }
+      ) }, status: 201
     else
       render json: { errors: solicitation.errors.messages }, status: 406
     end
@@ -35,12 +39,20 @@ class SolicitationsController < ApplicationController
 
   def index
     solicitations = Solicitation.all
-    render json: { solicitations: SolicitationSerializer.new(solicitations) }, status: 200
+    render json: { solicitations: SolicitationSerializer.new(solicitations,
+      {
+        include: [:pccsd_type]
+      }
+    ) }, status: 200
   end
 
   def show
     solicitation = Solicitation.find(params[:id])
-    render json: { solicitation: SolicitationSerializer.new(solicitation) }, status: 200
+    render json: { solicitation: SolicitationSerializer.new(solicitation,
+      {
+        include: [:pccsd_type]
+      }
+    ) }, status: 200
   end
 
   private
