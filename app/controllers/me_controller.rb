@@ -26,6 +26,11 @@ class MeController < ApplicationController
     end
   end
 
+  def invite_friend
+    email = params[:email]
+    InviteMailer.send_email(email).deliver_now
+  end
+
   def me_params
     params.require(:me).permit(
      :email,

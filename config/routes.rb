@@ -38,6 +38,7 @@ Rails.application.routes.draw do
     collection do
       post :subscribe_newsletter
       delete :remove_newsletter
+      post :invite_friend
     end
   end
 
