@@ -39,6 +39,7 @@ Rails.application.routes.draw do
       post :subscribe_newsletter
       delete :remove_newsletter
       post :invite_friend
+      post :profile
     end
   end
 

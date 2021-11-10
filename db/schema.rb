@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_04_215330) do
+ActiveRecord::Schema.define(version: 2021_11_10_162738) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -124,6 +124,15 @@ ActiveRecord::Schema.define(version: 2021_11_04_215330) do
     t.index ["wish_id"], name: "index_users_on_wish_id"
   end
 
+  create_table "users_treatments", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "assessment_type_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["assessment_type_id"], name: "index_users_treatments_on_assessment_type_id"
+    t.index ["user_id"], name: "index_users_treatments_on_user_id"
+  end
+
   create_table "wishes", force: :cascade do |t|
     t.string "name"
     t.boolean "is_active", default: true
@@ -134,4 +143,6 @@ ActiveRecord::Schema.define(version: 2021_11_04_215330) do
   add_foreign_key "assessments_users", "assessments"
   add_foreign_key "assessments_users", "users"
   add_foreign_key "solicitations", "pccsd_types"
+  add_foreign_key "users_treatments", "assessment_types"
+  add_foreign_key "users_treatments", "users"
 end

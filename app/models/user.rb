@@ -13,6 +13,9 @@ class User < ApplicationRecord
   has_many :assessments_users
   has_many :assessments, through: :assessments_users
 
+  has_many :users_treatments
+  has_many :assessment_types, through: :users_treatments
+
   belongs_to :wish, required: false
 
   validates :email, uniqueness: true
@@ -23,5 +26,13 @@ class User < ApplicationRecord
     Assessment.all.each do |assessment|
       AssessmentsUser.create(user_id: self.id, assessment_id: assessment.id, answer: false)
     end
+  end
+
+  def assign_treatment (assessment_type_id)
+    UsersTreatment.create(user_id: self.id, assessment_type_id: assessment_type_id)
+  end
+
+  def remove_treatments
+    UsersTreatment.where(user_id: self.id).destroy_all
   end
 end
