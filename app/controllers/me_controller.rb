@@ -32,7 +32,11 @@ class MeController < ApplicationController
   end
 
   def treatments
-    render json: { treatments: AssessmentTypeSerializer.new(current_user.assessment_types) }, status: 200
+    render json: { treatments: UsersTreatmentSerializer.new(UsersTreatment.where(user_id: current_user.id),
+      {
+        include: [:user, :assessment_type]
+      }
+    ) }, status: 200
   end
 
   def profile
