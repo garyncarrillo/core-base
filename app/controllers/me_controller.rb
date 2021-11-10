@@ -31,6 +31,10 @@ class MeController < ApplicationController
     InviteMailer.send_email(email).deliver_now
   end
 
+  def treatments
+    render json: { treatments: AssessmentTypeSerializer.new(current_user.assessment_types) }, status: 200
+  end
+
   def profile
     assessment_programs = AssessmentsUser.where('user_id = :user_id and ( assessment_id = 5 or assessment_id= 16 or assessment_id = 17) and answer = true ',  { user_id: current_user.id })
     assessment_types_4 = AssessmentsUser.where('user_id = :user_id and  assessment_id = 4 and answer = true ',  { user_id: current_user.id })
@@ -58,7 +62,7 @@ class MeController < ApplicationController
       # assign maximus treatment
       position = 0
       current_user.remove_treatments
-      
+
       counts.each do |element|
 
         if position == 0

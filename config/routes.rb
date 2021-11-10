@@ -40,6 +40,7 @@ Rails.application.routes.draw do
       delete :remove_newsletter
       post :invite_friend
       post :profile
+      get :treatments
     end
   end
 
